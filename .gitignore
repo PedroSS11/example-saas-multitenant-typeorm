@@ -1,0 +1,8 @@
+### NODE ###
+node_modules
+
+### ENVIROMENT ###
+.env
+
+### BUILD ###
+dist
