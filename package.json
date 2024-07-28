@@ -4,7 +4,8 @@
   "description": "A initial multi-tenant saas structure with ORM already configured (TypeORM)",
   "main": "index.ts",
   "scripts": {
-    "start": "tsc && node ./dist/index.js",
+    "start": "tsc && node ./dist/src/index.js",
+    "start:dev": "ts-node src/index.ts",
     "db:generate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:generate database/typeorm/migrations/migration  -d ./database/typeorm/migration.datasource.ts",
     "db:migrate": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js migration:run -d ./database/typeorm/migration.datasource.ts",
     "db:drop": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js schema:drop -d ./database/typeorm/migration.datasource.ts"
@@ -20,6 +21,7 @@
     "dotenv": "^16.4.5",
     "express": "^4.19.2",
     "jet-logger": "^1.3.1",
+    "mysql2": "^3.11.0",
     "pg": "^8.12.0",
     "typeorm": "^0.3.20",
     "typescript": "^5.5.4"
