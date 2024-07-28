@@ -2,10 +2,10 @@ import * as bodyParser from "body-parser";
 import { Server } from "@overnightjs/core";
 import Logger from "jet-logger";
 
-export class SampleServer extends Server {
+export class AppServer extends Server {
   private server_port;
   constructor(port: number) {
-    super(process.env.NODE_ENV === "development"); // setting showLogs to true
+    super(process.env.NODE_ENV === "development");
     this.initializeMiddlewares();
     // this.setupControllers();
     this.server_port = port;
@@ -17,6 +17,7 @@ export class SampleServer extends Server {
   }
 
   //   private setupControllers(): void {
+  //     // EXAMPLE
   //     const dbConnObj = new SomeDbConnClass("credentials");
 
   //     const userController = new UserController(dbConnObj);

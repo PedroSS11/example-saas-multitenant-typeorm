@@ -1,2 +1,2 @@
-import { SampleServer } from "./server";
-const _ = new SampleServer(3000).start();
+import { AppServer } from "./server";
+const _ = new AppServer(3000).start();
