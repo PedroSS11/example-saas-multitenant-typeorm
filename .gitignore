@@ -1,3 +1,6 @@
+# tests
+tests.ts
+
 # compiled output
 /dist
 /node_modules

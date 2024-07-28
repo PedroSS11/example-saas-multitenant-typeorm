@@ -1,2 +1,2 @@
-import { AppServer } from './server';
+import { AppServer } from "./server";
 new AppServer(3000).start();
