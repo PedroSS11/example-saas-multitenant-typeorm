@@ -1,4 +1,4 @@
-import { User } from "../../src/persistence/entities/user.entity";
+import { User } from "../../src/persistence/entities/core/user.entity";
 import { createConnection, getConnection, Connection } from "typeorm";
 import mysql from "mysql2/promise";
 // /**

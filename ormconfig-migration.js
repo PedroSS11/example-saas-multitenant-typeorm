@@ -1,16 +1,15 @@
-const { User } = require("./src/persistence/entities/user.entity");
+import { User } from "./src/persistence/entities/core/user.entity";
 const dotenv = require("dotenv");
-const path = require("path");
 const { DataSource } = require("typeorm");
 dotenv.config();
 
 const datasource = new DataSource({
   type: "mysql",
-  host: process.env.DB_HOST || "localhost",
-  port: process.env.DB_PORT || 3306,
-  username: process.env.DB_USERNAME || "root",
-  password: process.env.DB_PASSWORD || "",
-  database: process.env.DB_NAME || "company_waystar",
+  host: process.env.DB_HOST,
+  port: process.env.DB_PORT,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  database: process.env.DB_NAME,
   entities: [User],
   synchronize: true,
   migrations: [`database/typeorm/migrations/${process.env.DB_NAME}/*.ts`],

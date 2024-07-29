@@ -1,17 +1,19 @@
-import { User } from "@src/persistence/entities/user.entity";
 const { execSync } = require("child_process");
 const { createConnection } = require("typeorm");
+import { User } from "@src/persistence/entities/core/user.entity";
+import dotenv from "dotenv";
+dotenv.config();
 
 const mainDbConfig = {
   type: "mysql",
-  host: "localhost",
-  port: 3306,
-  username: "root",
-  password: "",
-  database: "company_waystar", // Use the main database like: "tenants_admin"
+  host: process.env.DATABASE_HOST,
+  port: process.env.DATABASE_PORT,
+  username: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.MAIN_DATABASE, // Use the main database: "tenants_admin"
 };
 
-const getDatabaseNames = async () => {
+async function getDatabaseNames() {
   const connection = await createConnection({
     ...mainDbConfig,
     entities: [],
@@ -21,9 +23,9 @@ const getDatabaseNames = async () => {
   await connection.close();
 
   return result.map((row: User) => row.firstName);
-};
+}
 
-const applyMigrations = async () => {
+async function applyMigrations() {
   const dbNames = await getDatabaseNames();
 
   for (const dbName of dbNames) {
@@ -38,6 +40,6 @@ const applyMigrations = async () => {
       console.error(`Error applying migrations for database ${dbName}:`, error);
     }
   }
-};
+}
 
 applyMigrations();

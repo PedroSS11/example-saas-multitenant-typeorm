@@ -1,31 +1,32 @@
-import { User } from "../../src/persistence/entities/user.entity";
 import Logger from "jet-logger";
-const { execSync } = require("child_process");
-const { createConnection } = require("typeorm");
-import path from "path";
+import { execSync } from "child_process";
 import fs from "fs";
+import dotenv from "dotenv";
+import { Tenant } from "@src/persistence/entities/management/tenant.entity";
+const { createConnection } = require("typeorm");
+dotenv.config();
 
 const mainDbConfig = {
   type: "mysql",
-  host: "localhost",
-  port: 3306,
-  username: "root",
-  password: "",
-  database: "company_waystar", // Use the main database like: "tenants_admin"
+  host: process.env.DATABASE_HOST,
+  port: process.env.DATABASE_PORT,
+  username: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
+  database: process.env.MAIN_DATABASE, // Use the main database like: "tenants_admin"
 };
 
-const getDatabaseNames = async () => {
+async function getDatabaseNames() {
   const connection = await createConnection({
     ...mainDbConfig,
-    entities: [User],
+    entities: [Tenant],
   });
 
-  const result = await connection.query("SELECT * FROM user");
+  const result = await connection.query("SELECT * FROM tenant");
   await connection.close();
-  return result.map((row: User) => row?.firstName);
-};
+  return result.map((row: Tenant) => row?.full_name);
+}
 
-const generateMigrations = async () => {
+async function generateMigrations() {
   const dbNames = await getDatabaseNames();
 
   for (const dbName of dbNames) {
@@ -43,11 +44,8 @@ const generateMigrations = async () => {
         { stdio: "inherit" }
       );
     } catch (error) {
-      console.error(
-        `Error generating migration for database ${dbName}:`,
-        error
-      );
+      Logger.err(`Error generating migration for database ${dbName}: ${error}`);
     }
   }
-};
+}
 generateMigrations();
