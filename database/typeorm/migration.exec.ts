@@ -2,27 +2,31 @@ import Logger from "jet-logger";
 import { execSync } from "child_process";
 import fs from "fs";
 import dotenv from "dotenv";
-import { Tenant } from "@src/persistence/entities/management/tenant.entity";
+import { Tenant } from "../../src/persistence/entities/management/tenant.entity";
 const { createConnection } = require("typeorm");
+import mysql from "mysql2/promise";
 dotenv.config();
 
 const mainDbConfig = {
-  type: "mysql",
-  host: process.env.DATABASE_HOST,
-  port: process.env.DATABASE_PORT,
-  username: process.env.DATABASE_USER,
-  password: process.env.DATABASE_PASSWORD,
-  database: process.env.MAIN_DATABASE, // Use the main database like: "tenants_admin"
+  host: process.env.DATABASE_HOST || "localhost",
+  port: process.env.DATABASE_PORT || 3306,
+  user: process.env.DATABASE_USER || "root",
+  password: process.env.DATABASE_PASSWORD || null,
+  database: process.env.MAIN_DATABASE || "management",
 };
 
 async function getDatabaseNames() {
   const connection = await createConnection({
-    ...mainDbConfig,
-    entities: [Tenant],
+    host: process.env.DATABASE_HOST,
+    user: process.env.DATABASE_USER,
+    password: process.env.DATABASE_PASSWORD,
+    database: process.env.MAIN_DATABASE,
+    port: 3306,
   });
 
   const result = await connection.query("SELECT * FROM tenant");
-  await connection.close();
+  console.log(result);
+  await connection.end();
   return result.map((row: Tenant) => row?.full_name);
 }
 

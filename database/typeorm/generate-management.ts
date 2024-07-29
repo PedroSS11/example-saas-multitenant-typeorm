@@ -1,7 +1,7 @@
 import Logger from "jet-logger";
 import dotenv from "dotenv";
 import { Tenant } from "../../src/persistence/entities/management/tenant.entity";
-import { createConnection, getConnection, Connection } from "typeorm";
+const { createConnection } = require("typeorm");
 import mysql from "mysql2/promise";
 dotenv.config();
 
@@ -21,7 +21,7 @@ export async function createMainDatabase(): Promise<void> {
   Logger.info("Created main database");
 }
 
-export const getDatabaseConnection = async (): Promise<void> => {
+export const getDatabaseConnectionManagement = async (): Promise<void> => {
   const dbName = DATABASE;
 
   // Connections variables must be passed on .ENV file !
@@ -38,13 +38,14 @@ export const getDatabaseConnection = async (): Promise<void> => {
     synchronize: false,
   });
   await connection.synchronize();
+
   Logger.info("ORM connected on main database and entities created");
 };
 
 (async () => {
   try {
     await createMainDatabase();
-    await getDatabaseConnection();
+    await getDatabaseConnectionManagement();
     Logger.info("Main database creation successed");
     process.exit(0);
   } catch (error) {
