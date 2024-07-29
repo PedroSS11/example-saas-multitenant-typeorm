@@ -2,7 +2,8 @@ import Logger from "jet-logger";
 import { execSync } from "child_process";
 import fs from "fs";
 import dotenv from "dotenv";
-import { Tenant } from "@src/persistence/entities/management/tenant.entity";
+import { Tenant } from "../../src/persistence/entities/management/tenant.entity";
+import { User } from "../../src/persistence/entities/core/user.entity";
 const { createConnection } = require("typeorm");
 dotenv.config();
 
@@ -18,12 +19,12 @@ const mainDbConfig = {
 async function getDatabaseNames() {
   const connection = await createConnection({
     ...mainDbConfig,
-    entities: [Tenant],
+    entities: [User],
   });
 
-  const result = await connection.query("SELECT * FROM tenant");
+  const result = await connection.query("SELECT * FROM user");
   await connection.close();
-  return result.map((row: Tenant) => row?.full_name);
+  return result.map((row: User) => row?.firstName);
 }
 
 async function generateMigrations() {

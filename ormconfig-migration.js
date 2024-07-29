@@ -1,14 +1,14 @@
-import { User } from "./src/persistence/entities/core/user.entity";
+const { User } = require("./src/persistence/entities/core/user.entity");
 const dotenv = require("dotenv");
 const { DataSource } = require("typeorm");
 dotenv.config();
 
 const datasource = new DataSource({
   type: "mysql",
-  host: process.env.DB_HOST,
-  port: process.env.DB_PORT,
-  username: process.env.DB_USERNAME,
-  password: process.env.DB_PASSWORD,
+  host: process.env.DATABASE_HOST,
+  port: process.env.DATABASE_PORT,
+  username: process.env.DATABASE_USER,
+  password: process.env.DATABASE_PASSWORD,
   database: process.env.DB_NAME,
   entities: [User],
   synchronize: true,

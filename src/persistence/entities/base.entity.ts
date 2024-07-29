@@ -5,6 +5,7 @@ import {
   CreateDateColumn,
   DeleteDateColumn,
   PrimaryColumn,
+  PrimaryGeneratedColumn,
   UpdateDateColumn,
 } from "typeorm";
 
@@ -27,7 +28,7 @@ export abstract class DefaultEntity<T> {
     this.updatedAt = new Date();
   }
 
-  @PrimaryColumn({ type: "uuid" })
+  @PrimaryGeneratedColumn()
   id: string;
 
   @CreateDateColumn()

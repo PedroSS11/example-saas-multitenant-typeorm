@@ -1,4 +1,9 @@
-import { Controller, Post } from "@overnightjs/core";
+import {
+  ClassMiddleware,
+  Controller,
+  Middleware,
+  Post,
+} from "@overnightjs/core";
 import {
   createDatabase,
   getDatabaseConnection,
