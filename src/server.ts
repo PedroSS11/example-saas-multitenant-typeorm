@@ -1,7 +1,7 @@
 import './util/module-alias';
 import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
-import Logger from 'jet-logger';
+import AppLogger from '@src/infra/monitoring/app.logger';
 import { UserController } from './http/rest/controller/tenant.controller';
 
 export class AppServer extends Server {
@@ -25,7 +25,7 @@ export class AppServer extends Server {
 
   public start(): void {
     this.app.listen(this.server_port, () => {
-      Logger.imp('Server listening on port: ' + this.server_port);
+      AppLogger.info('Server listening on port: ' + this.server_port);
     });
   }
 }

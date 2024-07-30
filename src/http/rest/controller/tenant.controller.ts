@@ -1,5 +1,4 @@
-import { Controller, Post } from '@overnightjs/core';
-import Logger from 'jet-logger';
+import { Controller, Get, Post } from '@overnightjs/core';
 import { Request, Response } from 'express';
 import { randomUUID } from 'crypto';
 import { ManagementDataSource } from '@src/infra/typeorm/datasource/management.datasource';
@@ -8,12 +7,13 @@ import {
   createDatabase,
   getDatabaseConnection,
 } from '@src/infra/typeorm/datasource/migration.datasource';
+import AppLogger from '@src/infra/monitoring/app.logger';
 
 @Controller('api/tenant')
 export class UserController {
   @Post()
   private async add(req: Request, res: Response): Promise<void> {
-    Logger.info('Creating tenant');
+    AppLogger.info('Creating tenant');
     const { tenantId } = req.body;
 
     if (!tenantId) {
@@ -28,13 +28,24 @@ export class UserController {
       await createDatabase(tenantId);
       const connection = await getDatabaseConnection(tenantId);
       await connection.synchronize();
-      Logger.info(`Database and tables created for tenant ${tenantId}`);
+      AppLogger.info(`Database and tables created for tenant ${tenantId}`);
       res.status(201).json({
         message: `Database and tables created for tenant ${tenantId}`,
       });
     } catch (error) {
-      Logger.err(error, true);
+      AppLogger.error(`An error ocurred: ${error}`);
       res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  @Get()
+  private async testEndpoint(req: Request, res: Response): Promise<void> {
+    AppLogger.info('Test endpoint was called');
+    try {
+      res.status(200).json({ message: 'SUCESSO' });
+    } catch (error) {
+      res.status(500).json({ error });
+      AppLogger.error(`An error occurred: ${error}`);
     }
   }
 }
