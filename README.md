@@ -35,7 +35,7 @@ A Clean Architecture promove a separação de responsabilidades e facilita a evo
 
 ### Data Access Object (DAO)
 
-Para facilitar o acesso aos dados e promover uma camada de abstração entre a lógica de negócios e a base de dados, o projeto suporta a implementação de Data Access Objects (DAOs). Nesta estrutura inicial podemos usar DAOs como acesso direto a entidade de banco de dados, em um repository podemos fazer uso de DAOs para montar alguma rotina de consulta e retornar o mapeamento dos dados para entidades de domínio. Em resumo DAOs são um caminho direto de acesso os modelos de banco, já os repository lidam mais com entidades. Os DAOs são responsáveis por:
+Para facilitar o acesso aos dados e promover uma camada de abstração entre a lógica de negócios e a base de dados, o projeto suporta a implementação de Data Access Objects (DAOs). Nesta estrutura inicial podemos usar DAOs como acesso direto a modelos de banco de dados, já em um repository podemos fazer uso de DAOs para montar alguma rotina de consulta e retornar o mapeamento dos dados para entidades de domínio. Em resumo DAOs são um caminho direto de acesso os modelos de banco, já os repository lidam mais com entidades. Os DAOs são responsáveis por:
 
 - Executar operações CRUD (Create, Read, Update, Delete) de maneira eficiente.
 - Abstrair a lógica de acesso a dados da lógica de negócios.
