@@ -10,7 +10,7 @@ import {
 import AppLogger from '@src/infra/monitoring/app.logger';
 
 @Controller('api/tenant')
-export class UserController {
+export class TenantController {
   @Post()
   private async add(req: Request, res: Response): Promise<void> {
     AppLogger.info('Creating tenant');

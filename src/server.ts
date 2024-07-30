@@ -2,7 +2,7 @@ import './util/module-alias';
 import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
 import AppLogger from '@src/infra/monitoring/app.logger';
-import { UserController } from './http/rest/controller/tenant.controller';
+import { TenantController } from './http/rest/controller/tenant.controller';
 
 export class AppServer extends Server {
   private server_port;
@@ -19,7 +19,7 @@ export class AppServer extends Server {
   }
 
   private setupControllers(): void {
-    const userController = new UserController();
+    const userController = new TenantController();
     this.addControllers([userController]);
   }
 
