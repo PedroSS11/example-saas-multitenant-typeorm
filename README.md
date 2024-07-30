@@ -104,13 +104,15 @@ src/
 
 		└── rest/
 
-            └── controller/
+            └── controller
 
 	├── infra/
 
 		└── typeorm/
 
 			└── datasource
+
+		└── monitoring/
 
 	├── persistence/
 
@@ -122,6 +124,6 @@ src/
 
     ├── index.ts
 
-    └── server.ts
+    ├── server.ts
 
 ```
