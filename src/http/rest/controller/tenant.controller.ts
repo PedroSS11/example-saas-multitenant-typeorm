@@ -8,7 +8,7 @@ import {
   getDatabaseConnection,
 } from '@src/infra/typeorm/datasource/migration.datasource';
 import AppLogger from '@src/infra/monitoring/app.logger';
-import { RegisterTenantData } from '@src/core/types/Tenant.types';
+import { RegisterTenantData } from '@src/core/types/tenant.types';
 
 @Controller('api/tenant')
 export class TenantController {
