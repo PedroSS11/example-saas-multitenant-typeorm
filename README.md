@@ -57,14 +57,16 @@ MAIN_DATABASE=nome-do-banco-de-gerenciamento
 ## Estrutura do Projeto
 
 ```plaintext
-
+database/
+    ├── typeorm/
+        ├── migrations/
 src/
 
 	├── http/
 
 		└── rest/
 
-			└── controller/
+            └── controller/
 
 	├── infra/
 
