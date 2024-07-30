@@ -58,8 +58,11 @@ MAIN_DATABASE=nome-do-banco-de-gerenciamento
 
 ```plaintext
 database/
+
     ├── typeorm/
+
         ├── migrations/
+
 src/
 
 	├── http/
@@ -82,8 +85,8 @@ src/
 
 	├── utils/
 
-├── index.ts
+    ├── index.ts
 
-└── server.ts
+    └── server.ts
 
 ```
