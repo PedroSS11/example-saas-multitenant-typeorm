@@ -4,6 +4,9 @@
 /build
 .env
 
+# Migrations
+/database/typeorm/migrations/*
+
 # Logs
 logs
 *.log

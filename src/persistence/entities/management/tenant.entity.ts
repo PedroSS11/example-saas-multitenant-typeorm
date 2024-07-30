@@ -1,8 +1,11 @@
-import { Column, Entity } from "typeorm";
-import { DefaultEntity } from "../base.entity";
+import { Column, Entity } from 'typeorm';
+import { DefaultEntity } from '../base.entity';
 
-@Entity({ name: "tenant" })
+@Entity({ name: 'tenant' })
 export class Tenant extends DefaultEntity<Tenant> {
-  @Column({ name: "full_name", nullable: false, type: "varchar" })
+  @Column({ name: 'full_name', nullable: false, type: 'varchar' })
   full_name: string;
+
+  @Column({ name: 'cnpj', type: 'varchar' })
+  cnpj: string;
 }

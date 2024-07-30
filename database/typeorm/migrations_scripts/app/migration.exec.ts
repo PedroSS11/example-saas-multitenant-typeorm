@@ -2,9 +2,7 @@ import Logger from 'jet-logger';
 import { execSync } from 'child_process';
 import fs from 'fs';
 import dotenv from 'dotenv';
-import { Tenant } from '../../src/persistence/entities/management/tenant.entity';
-const { createConnection } = require('typeorm');
-import mysql, { FieldPacket, QueryResult } from 'mysql2/promise';
+import mysql from 'mysql2/promise';
 dotenv.config();
 
 const mainDbConfig = {

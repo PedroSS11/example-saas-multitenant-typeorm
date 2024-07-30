@@ -22,10 +22,13 @@ export class TenantController {
     }
 
     try {
+      // Management Datasource initialization
       const managementConnection = await ManagementDataSource.initialize();
       const repo = managementConnection.getRepository(Tenant);
+      // Create Tenant
       const newData = new Tenant({ id: randomUUID(), full_name: tenantId });
       await repo.save(newData);
+      // MySQL connection + create tenant database and generate tables
       await createDatabase(tenantId);
       const connection = await getDatabaseConnection(tenantId);
       await connection.synchronize();

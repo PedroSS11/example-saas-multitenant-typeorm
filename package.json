@@ -8,9 +8,11 @@
     "build": "tsc",
     "start:prod": "tsc && node dist/src/index.js",
     "start:dev": "ts-node src/index.ts",
-    "db:generate:management": "tsc && node ./dist/database/typeorm/generate-management.js",
-    "db:generate": "tsc && node ./dist/database/typeorm/migration.exec.js",
-    "db:migrate": "tsc && node ./dist/database/typeorm/apply-migration.js",
+    "db:create:management": "tsc && node ./dist/database/typeorm/migrations_scripts/management/generate-management.js",
+    "db:generate:management": "tsc && node ./dist/database/typeorm/migrations_scripts/management/migration-management.exec.js",
+    "db:migrate:management": "tsc && node ./dist/database/typeorm/migrations_scripts/management/apply-migration-management.js",
+    "db:generate": "tsc && node ./dist/database/typeorm/migrations_scripts/app/migration.exec.js",
+    "db:migrate": "tsc && node ./dist/database/typeorm/migrations_scripts/app/apply-migration.js",
     "db:drop": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js schema:drop -d ./database/typeorm/migration.datasource.ts"
   },
   "keywords": [
