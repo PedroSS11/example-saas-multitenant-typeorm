@@ -1,6 +1,6 @@
-import Logger from 'jet-logger';
+import Logger from '@src/infra/monitoring/app.logger';
+import { Tenant } from '@src/persistence/entities/management/tenant.entity';
 import dotenv from 'dotenv';
-import { Tenant } from '../../../../src/persistence/entities/management/tenant.entity';
 const { createConnection } = require('typeorm');
 import mysql from 'mysql2/promise';
 dotenv.config();
@@ -18,7 +18,7 @@ export async function createMainDatabase(): Promise<void> {
   const newDbName = DATABASE;
   await connection.query(`CREATE DATABASE IF NOT EXISTS ${newDbName}`);
   await connection.end();
-  Logger.info('Created main database');
+  Logger.info('Success creating main database');
 }
 
 export const getDatabaseConnectionManagement = async (): Promise<void> => {
@@ -29,10 +29,10 @@ export const getDatabaseConnectionManagement = async (): Promise<void> => {
   const connection = await createConnection({
     name: dbName,
     type: 'mysql',
-    host: 'localhost',
+    host: process.env.DATABASE_HOST,
     port: 3306,
-    username: 'root',
-    password: '',
+    username: process.env.DATABASE_HOST,
+    password: process.env.DATABASE_PASSWORD,
     database: dbName,
     entities: [Tenant],
     synchronize: false,
@@ -46,10 +46,10 @@ export const getDatabaseConnectionManagement = async (): Promise<void> => {
   try {
     await createMainDatabase();
     await getDatabaseConnectionManagement();
-    Logger.info('Main database creation successed');
+    Logger.info('Main database and tables created with successes');
     process.exit(0);
   } catch (error) {
-    Logger.err(`Main database creation failed: ${error}`);
+    Logger.error(`Main database creation failed: ${error}`);
     process.exit(1);
   }
 })();
