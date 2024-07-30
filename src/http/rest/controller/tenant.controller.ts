@@ -8,13 +8,14 @@ import {
   getDatabaseConnection,
 } from '@src/infra/typeorm/datasource/migration.datasource';
 import AppLogger from '@src/infra/monitoring/app.logger';
+import { RegisterTenantData } from '@src/core/types/Tenant.types';
 
 @Controller('api/tenant')
 export class TenantController {
   @Post()
   private async add(req: Request, res: Response): Promise<void> {
     AppLogger.info('Creating tenant');
-    const { tenantId } = req.body;
+    const { tenantId }: RegisterTenantData = req.body;
 
     if (!tenantId) {
       res.status(400).json({ error: 'Tenant ID is required' });
