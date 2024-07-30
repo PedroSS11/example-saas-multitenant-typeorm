@@ -12,18 +12,18 @@ import {
 @Controller('api/tenant')
 export class UserController {
   @Post()
-  private async add(req: Request, res: Response) {
+  private async add(req: Request, res: Response): Promise<void> {
     Logger.info('Creating tenant');
     const { tenantId } = req.body;
 
     if (!tenantId) {
-      return res.status(400).json({ error: 'Tenant ID is required' });
+      res.status(400).json({ error: 'Tenant ID is required' });
     }
 
     try {
       const managementConnection = await ManagementDataSource.initialize();
-      const repo = await managementConnection.getRepository(Tenant);
-      const newData = new Tenant({ id: randomUUID(), full_name: 'pedro' });
+      const repo = managementConnection.getRepository(Tenant);
+      const newData = new Tenant({ id: randomUUID(), full_name: tenantId });
       await repo.save(newData);
       await createDatabase(tenantId);
       const connection = await getDatabaseConnection(tenantId);
