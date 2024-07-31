@@ -9,7 +9,7 @@
     "start:prod": "tsc && node dist/src/index.js",
     "start:dev": "ts-node src/index.ts",
     "db:create:management": "tsc && node ./dist/database/typeorm/migrations_scripts/management/generate-management.js",
-    "db:generate:management": "tsc && node ./dist/database/typeorm/migrations_scripts/management/migration-management.exec.js",
+    "db:generate:management": "tsc && node -r tsconfig-paths/register ./dist/database/typeorm/migrations_scripts/management/migration-management.exec.js",
     "db:migrate:management": "tsc && node ./dist/database/typeorm/migrations_scripts/management/apply-migration-management.js",
     "db:generate": "tsc && node ./dist/database/typeorm/migrations_scripts/app/migration.exec.js",
     "db:migrate": "tsc && node ./dist/database/typeorm/migrations_scripts/app/apply-migration.js",

@@ -8,4 +8,7 @@ export class Tenant extends DefaultEntity<Tenant> {
 
   @Column({ name: 'cnpj', type: 'varchar' })
   cnpj: string;
+
+  @Column({ name: 'adress', type: 'varchar' })
+  adress: string;
 }
