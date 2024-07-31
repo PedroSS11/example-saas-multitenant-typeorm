@@ -3,7 +3,7 @@ import dotenv from 'dotenv';
 import { Tenant } from '@src/persistence/entities/management/tenant.entity';
 dotenv.config();
 
-export const ManagementDataSource = new DataSource({
+export const ManagementDataSource: DataSource = new DataSource({
   type: 'mysql',
   host: process.env.DATABASE_HOST,
   port: 3306,

@@ -9,9 +9,17 @@ import {
 } from '@src/infra/typeorm/datasource/migration.datasource';
 import AppLogger from '@src/infra/monitoring/app.logger';
 import { RegisterTenantData } from '@src/core/types/tenant.types';
+import { TenantRepository } from '@src/persistence/repository/management/tenant.repository';
 
 @Controller('api/tenant')
 export class TenantController {
+  private _managementDatasource: typeof ManagementDataSource;
+  private _tenantRepo: TenantRepository;
+  constructor() {
+    this._managementDatasource = ManagementDataSource;
+    this._tenantRepo = new TenantRepository(this._managementDatasource);
+  }
+
   @Post()
   private async add(req: Request, res: Response): Promise<void> {
     AppLogger.info('Creating tenant');
@@ -23,11 +31,15 @@ export class TenantController {
 
     try {
       // Management Datasource initialization
-      const managementConnection = await ManagementDataSource.initialize();
-      const repo = managementConnection.getRepository(Tenant);
+      await this._managementDatasource.initialize();
       // Create Tenant
-      const newData = new Tenant({ id: randomUUID(), full_name: tenantId });
-      await repo.save(newData);
+      const newData = new Tenant({
+        id: randomUUID(),
+        full_name: tenantId,
+        cnpj: '123131',
+        adress: '31foiaeko',
+      });
+      await this._tenantRepo.save(newData);
       // MySQL connection + create tenant database and generate tables
       await createDatabase(tenantId);
       const connection = await getDatabaseConnection(tenantId);
