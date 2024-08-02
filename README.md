@@ -89,7 +89,7 @@ MAIN_DATABASE=nome-do-banco-de-gerenciamento
 
 ```
 
-## Estrutura do Projeto
+<!-- ## Estrutura do Projeto
 
 ```plaintext
 database/
@@ -126,4 +126,4 @@ src/
 
     ├── server.ts
 
-```
+``` -->
