@@ -1,4 +1,3 @@
-import { NotImplementedException } from 'src/core/exceptions/NotImplemented.exception';
 import { DefaultTypeOrmRepository } from '../../../infra/typeorm/repository/default-typeorm.repository';
 import { Tenant } from '../../entities/management/tenant.entity';
 import { DataSource } from 'typeorm';
