@@ -8,7 +8,7 @@ import {
 } from 'typeorm';
 
 export abstract class DefaultTypeOrmRepository<T extends DefaultEntity<T>> {
-  private repository: Repository<T>;
+  public repository: Repository<T>;
   constructor(
     readonly entity: EntityTarget<T>,
     readonly dataSource: DataSource,

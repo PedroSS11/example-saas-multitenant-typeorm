@@ -5,7 +5,6 @@ import { Tenant } from '../../../persistence/entities/management/tenant.entity';
 import { CreateTenantDTO } from '../../dto/management/tenant.dto';
 import { randomUUID } from 'crypto';
 import { CoreDatasourceService } from '../datasource/datasource.service';
-import { NotImplementedException } from 'src/core/exceptions/NotImplemented.exception';
 
 export class TenantService implements ITenantService {
   private readonly _managementDatasource: typeof ManagementDataSource;
@@ -15,6 +14,7 @@ export class TenantService implements ITenantService {
   constructor() {
     this._managementDatasource = ManagementDataSource;
     this._tenantRepo = new TenantRepository(this._managementDatasource);
+    this._managementDatasource.initialize();
     this._coreDatasourceService = new CoreDatasourceService();
   }
 
@@ -41,10 +41,14 @@ export class TenantService implements ITenantService {
   }
 
   public async getTenantById(tenantUUID: string): Promise<Tenant | null> {
-    throw new NotImplementedException();
+    return this._tenantRepo.findOneById(tenantUUID);
   }
 
   public async getTenantByName(tenantName: string): Promise<Tenant | null> {
-    throw new NotImplementedException();
+    return await this._tenantRepo.findByName(tenantName);
+  }
+
+  public async getAllTenants(): Promise<Tenant[] | []> {
+    return this._tenantRepo.findAll();
   }
 }

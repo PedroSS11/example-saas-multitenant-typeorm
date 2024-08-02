@@ -6,4 +6,5 @@ export interface ITenantService {
   createDatabaseAndTablesForTenant(tenantName: string): Promise<void>;
   getTenantById(tenantUUID: string): Promise<Tenant | null>;
   getTenantByName(tenantName: string): Promise<Tenant | null>;
+  getAllTenants(): Promise<Tenant[] | []>;
 }

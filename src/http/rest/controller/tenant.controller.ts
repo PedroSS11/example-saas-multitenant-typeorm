@@ -1,17 +1,14 @@
-import { Controller, Post } from '@overnightjs/core';
+import { Controller, Get, Post } from '@overnightjs/core';
 import { Request, Response } from 'express';
-import { ManagementDataSource } from '../../../infra/typeorm/datasource/management.datasource';
 import AppLogger from '../../../infra/monitoring/app.logger';
 import { TenantService } from '../../../core/services/management/tenant.service';
 import { RegisterTenantData } from '../types/tenant.types';
 
 @Controller('api/tenant')
 export class TenantController {
-  private readonly _managementDatasource: typeof ManagementDataSource;
   private readonly _tenantService: TenantService;
 
   constructor() {
-    this._managementDatasource = ManagementDataSource;
     this._tenantService = new TenantService();
   }
 
@@ -25,9 +22,6 @@ export class TenantController {
     }
 
     try {
-      // Management Datasource initialization
-      await this._managementDatasource.initialize();
-      //  Create Tenant
       await this._tenantService.createTenant({
         full_name,
         cnpj,
@@ -43,6 +37,31 @@ export class TenantController {
     } catch (error) {
       AppLogger.error(`An error ocurred: ${error}`);
       res.status(500).json({ error: 'Internal Server Error' });
+    }
+  }
+
+  @Get(':name')
+  private async getByName(req: Request, res: Response): Promise<void> {
+    const tenantName: string = req.params.name;
+    AppLogger.info('Getting tenant by name');
+    try {
+      const tenant = await this._tenantService.getTenantByName(tenantName);
+      res.status(200).json(tenant);
+    } catch (error) {
+      AppLogger.error(`An error ocurred: ${error}`);
+      res.status(500).json({ error: error });
+    }
+  }
+
+  @Get()
+  private async getAll(req: Request, res: Response): Promise<void> {
+    AppLogger.info('Getting all tenants');
+    try {
+      const tenants = await this._tenantService.getAllTenants();
+      res.status(200).json(tenants);
+    } catch (error) {
+      AppLogger.error(`An error ocurred: ${error}`);
+      res.status(500).json({ error: error });
     }
   }
 }
