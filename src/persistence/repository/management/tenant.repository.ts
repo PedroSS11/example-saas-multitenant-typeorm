@@ -1,6 +1,6 @@
-import { DefaultTypeOrmRepository } from '@src/infra/typeorm/repository/default-typeorm.repository';
-import { Tenant } from '@src/persistence/entities/management/tenant.entity';
-import { DataSource, EntityTarget } from 'typeorm';
+import { DefaultTypeOrmRepository } from '../../../infra/typeorm/repository/default-typeorm.repository';
+import { Tenant } from '../../entities/management/tenant.entity';
+import { DataSource } from 'typeorm';
 
 export class TenantRepository extends DefaultTypeOrmRepository<Tenant> {
   constructor(readonly dataSource: DataSource) {

@@ -1,4 +1,4 @@
-import Logger from '@src/infra/monitoring/app.logger';
+import Logger from '../../../../src/infra/monitoring/app.logger';
 import { execSync } from 'child_process';
 import fs from 'fs';
 import dotenv from 'dotenv';

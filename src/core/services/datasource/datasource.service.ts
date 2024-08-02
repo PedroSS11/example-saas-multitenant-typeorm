@@ -1,4 +1,4 @@
-import { CoreDatasource } from '@src/infra/typeorm/datasource/core.datasource';
+import { CoreDatasource } from '../../../infra/typeorm/datasource/core.datasource';
 import { Connection } from 'typeorm';
 
 export class CoreDatasourceService {

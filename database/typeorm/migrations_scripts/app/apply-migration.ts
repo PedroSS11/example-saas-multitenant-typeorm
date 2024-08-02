@@ -1,5 +1,5 @@
 const { execSync } = require('child_process');
-import Logger from '@src/infra/monitoring/app.logger';
+import Logger from '../../../../src/infra/monitoring/app.logger';
 import dotenv from 'dotenv';
 import mysql from 'mysql2/promise';
 dotenv.config();

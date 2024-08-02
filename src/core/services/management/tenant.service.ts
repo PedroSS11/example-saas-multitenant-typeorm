@@ -1,8 +1,8 @@
-import { ManagementDataSource } from '@src/infra/typeorm/datasource/management.datasource';
-import { TenantRepository } from '@src/persistence/repository/management/tenant.repository';
+import { ManagementDataSource } from '../../../infra/typeorm/datasource/management.datasource';
+import { TenantRepository } from '../../../persistence/repository/management/tenant.repository';
 import { ITenantService } from './interfaces/ITenant-service';
-import { Tenant } from '@src/persistence/entities/management/tenant.entity';
-import { CreateTenantDTO } from '@src/core/dto/management/tenant.dto';
+import { Tenant } from '../../../persistence/entities/management/tenant.entity';
+import { CreateTenantDTO } from '../../dto/management/tenant.dto';
 import { randomUUID } from 'crypto';
 import { CoreDatasourceService } from '../datasource/datasource.service';
 

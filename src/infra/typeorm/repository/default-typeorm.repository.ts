@@ -1,4 +1,4 @@
-import { DefaultEntity } from '@src/persistence/entities/base.entity';
+import { DefaultEntity } from '../../../persistence/entities/base.entity';
 import {
   DataSource,
   EntityTarget,

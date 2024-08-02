@@ -1,7 +1,7 @@
-import './util/module-alias';
+// import './util/module-alias';
 import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
-import AppLogger from '@src/infra/monitoring/app.logger';
+import AppLogger from './infra/monitoring/app.logger';
 import { TenantController } from './http/rest/controller/tenant.controller';
 
 export class AppServer extends Server {

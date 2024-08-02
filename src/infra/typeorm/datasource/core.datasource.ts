@@ -1,7 +1,7 @@
 import { createConnection, Connection } from 'typeorm';
 import mysql from 'mysql2/promise';
 import dotenv from 'dotenv';
-import { User } from '@src/persistence/entities/core/user.entity';
+import { User } from '../../../persistence/entities/core/user.entity';
 dotenv.config();
 
 const connections: { [key: string]: Connection } = {};

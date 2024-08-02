@@ -52,14 +52,14 @@
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "baseUrl": "./",
-    "paths": {
-      "@src/*": ["./src/*"],
-      "@test/*": ["./test/*"]
-    },
-    "rootDirs": ["./src", "./test"],
+    // "paths": {
+    //   "@src/*": ["./src/*"],
+    //   "@test/*": ["./test/*"]
+    // },
+    //"rootDirs": ["./src", "./test"],
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["./src/**/*.ts", "./test/**/*.ts", "./database/**/*.ts"],
+  "include": ["./src/**/*.ts", "./database/**/*.ts"],
   "exclude": ["./node_modules/*", "dist"]
 }

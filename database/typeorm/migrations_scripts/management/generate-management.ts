@@ -1,5 +1,5 @@
-import Logger from '@src/infra/monitoring/app.logger';
-import { Tenant } from '@src/persistence/entities/management/tenant.entity';
+import Logger from '../../../../src/infra/monitoring/app.logger';
+import { Tenant } from '../../../../src/persistence/entities/management/tenant.entity';
 import dotenv from 'dotenv';
 const { createConnection } = require('typeorm');
 import mysql from 'mysql2/promise';
@@ -31,7 +31,7 @@ export const getDatabaseConnectionManagement = async (): Promise<void> => {
     type: 'mysql',
     host: process.env.DATABASE_HOST,
     port: 3306,
-    username: process.env.DATABASE_HOST,
+    username: process.env.DATABASE_USER,
     password: process.env.DATABASE_PASSWORD,
     database: dbName,
     entities: [Tenant],
