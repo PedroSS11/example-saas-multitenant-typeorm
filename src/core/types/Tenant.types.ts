@@ -1,3 +1,5 @@
 export type RegisterTenantData = {
-  tenantId: string;
+  full_name: string;
+  cnpj: string;
+  adress: string;
 };
