@@ -13,8 +13,8 @@ export class TenantService implements ITenantService {
 
   constructor() {
     this._managementDatasource = ManagementDataSource;
-    this._tenantRepo = new TenantRepository(this._managementDatasource);
     this._managementDatasource.initialize();
+    this._tenantRepo = new TenantRepository(this._managementDatasource);
     this._coreDatasourceService = new CoreDatasourceService();
   }
 
