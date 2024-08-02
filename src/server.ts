@@ -1,4 +1,3 @@
-// import './util/module-alias';
 import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
 import AppLogger from './infra/monitoring/app.logger';

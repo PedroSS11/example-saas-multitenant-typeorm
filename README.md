@@ -12,7 +12,7 @@ Este projeto tem o intuito de servir como uma base inicial já configurada para 
 
 ## Sobre a Arquitetura
 
-Este projeto foi desenvolvido seguindo princípios de Design Orientado a Domínio (DDD) e Clean Architecture, visando manter o código modular, testável e de fácil manutenção. Também está preparado para suportar a abordagem Data Access Object (DAO) para acesso a dados e repository. 
+Este projeto foi desenvolvido seguindo princípios de Design Orientado a Domínio (DDD) e Clean Architecture, visando manter o código modular, testável e de fácil manutenção. Também está preparado para suportar a abordagem Data Access Object (DAO) para acesso a dados e repository.
 
 ### Design Orientado a Domínio (DDD)
 
@@ -88,42 +88,3 @@ DATABASE_PASSWORD=sua-senha
 MAIN_DATABASE=nome-do-banco-de-gerenciamento
 
 ```
-
-<!-- ## Estrutura do Projeto
-
-```plaintext
-database/
-
-    ├── typeorm/
-
-        ├── migrations/
-
-src/
-
-	├── http/
-
-		└── rest/
-
-            └── controller
-
-	├── infra/
-
-		└── typeorm/
-
-			└── datasource
-
-		└── monitoring/
-
-	├── persistence/
-
-		└── entities
-
-		└── repository
-
-	├── utils/
-
-    ├── index.ts
-
-    ├── server.ts
-
-``` -->
