@@ -4,15 +4,19 @@ import { ITenantService } from './interfaces/ITenant-service';
 import { Tenant } from '@src/persistence/entities/management/tenant.entity';
 import { CreateTenantDTO } from '@src/core/dto/management/tenant.dto';
 import { randomUUID } from 'crypto';
+import { CoreDatasourceService } from '../datasource/datasource.service';
 
 export class TenantService implements ITenantService {
   private _managementDatasource: typeof ManagementDataSource;
   private readonly _tenantRepo: TenantRepository;
+  private readonly _coreDatasourceService: CoreDatasourceService;
 
   constructor() {
     this._managementDatasource = ManagementDataSource;
     this._tenantRepo = new TenantRepository(this._managementDatasource);
+    this._coreDatasourceService = new CoreDatasourceService();
   }
+
   public async createTenant(tenant: CreateTenantDTO): Promise<Tenant> {
     const tenantEntityObject = new Tenant({
       id: randomUUID(),
@@ -24,5 +28,12 @@ export class TenantService implements ITenantService {
     });
     const tenantEntity = await this._tenantRepo.save(tenantEntityObject);
     return tenantEntity;
+  }
+
+  public async createDatabaseAndTablesForTenant(tenantName: string) {
+    await this._coreDatasourceService.createDatabase(tenantName);
+    const connection =
+      await this._coreDatasourceService.getDatabaseConnection(tenantName);
+    await this._coreDatasourceService.connectionSynchronize(connection);
   }
 }
