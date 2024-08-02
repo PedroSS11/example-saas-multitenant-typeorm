@@ -3,4 +3,7 @@ import { Tenant } from '../../../../persistence/entities/management/tenant.entit
 
 export interface ITenantService {
   createTenant(tenant: CreateTenantDTO): Promise<Tenant>;
+  createDatabaseAndTablesForTenant(tenantName: string): Promise<void>;
+  getTenantById(tenantUUID: string): Promise<Tenant | null>;
+  getTenantByName(tenantName: string): Promise<Tenant | null>;
 }

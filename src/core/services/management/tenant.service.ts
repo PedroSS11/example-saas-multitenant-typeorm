@@ -5,9 +5,10 @@ import { Tenant } from '../../../persistence/entities/management/tenant.entity';
 import { CreateTenantDTO } from '../../dto/management/tenant.dto';
 import { randomUUID } from 'crypto';
 import { CoreDatasourceService } from '../datasource/datasource.service';
+import { NotImplementedException } from 'src/core/exceptions/NotImplemented.exception';
 
 export class TenantService implements ITenantService {
-  private _managementDatasource: typeof ManagementDataSource;
+  private readonly _managementDatasource: typeof ManagementDataSource;
   private readonly _tenantRepo: TenantRepository;
   private readonly _coreDatasourceService: CoreDatasourceService;
 
@@ -30,10 +31,20 @@ export class TenantService implements ITenantService {
     return tenantEntity;
   }
 
-  public async createDatabaseAndTablesForTenant(tenantName: string) {
+  public async createDatabaseAndTablesForTenant(
+    tenantName: string,
+  ): Promise<void> {
     await this._coreDatasourceService.createDatabase(tenantName);
     const connection =
       await this._coreDatasourceService.getDatabaseConnection(tenantName);
     await this._coreDatasourceService.connectionSynchronize(connection);
+  }
+
+  public async getTenantById(tenantUUID: string): Promise<Tenant | null> {
+    throw new NotImplementedException();
+  }
+
+  public async getTenantByName(tenantName: string): Promise<Tenant | null> {
+    throw new NotImplementedException();
   }
 }
