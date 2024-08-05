@@ -1,9 +1,9 @@
 import { DefaultEntity } from '../../../persistence/entities/base.entity';
 import {
   DataSource,
+  DeleteResult,
   EntityTarget,
   FindOptionsWhere,
-  ObjectLiteral,
   Repository,
 } from 'typeorm';
 
@@ -30,6 +30,10 @@ export abstract class DefaultTypeOrmRepository<T extends DefaultEntity<T>> {
 
   async findAll(): Promise<T[] | []> {
     return this.repository.find();
+  }
+
+  async deleteById(id: string): Promise<DeleteResult> {
+    return this.repository.delete(id);
   }
 
   /**
