@@ -1,8 +1,8 @@
 import * as bodyParser from 'body-parser';
 import { Server } from '@overnightjs/core';
 import AppLogger from './infra/monitoring/app.logger';
-import { TenantController } from './http/rest/controller/tenant.controller';
-import { UserController } from './http/rest/controller/user.controller';
+import { TenantController } from './http/rest/controller/management/tenant.controller';
+import { UserController } from './http/rest/controller/core/user.controller';
 
 export class AppServer extends Server {
   private server_port;

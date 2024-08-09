@@ -6,7 +6,7 @@
   "scripts": {
     "start": "ts-node ./src/index.ts",
     "build": "tsc",
-    "start:prod": "tsc && node dist/src/index.js",
+    "start:prod": "tsc && node -r tsconfig-paths/register dist/src/index.js",
     "start:dev": "ts-node src/index.ts",
     "db:create:management": "tsc && node ./dist/database/typeorm/migrations_scripts/management/generate-management.js",
     "db:generate:management": "tsc && node -r tsconfig-paths/register ./dist/database/typeorm/migrations_scripts/management/migration-management.exec.js",
@@ -48,8 +48,5 @@
     "prettier": "^3.0.0",
     "ts-node": "^10.9.1",
     "tsconfig-paths": "^4.2.0"
-  },
-  "_moduleAliases": {
-    "@src": "dist/src"
   }
 }

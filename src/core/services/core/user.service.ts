@@ -1,7 +1,7 @@
-import { UserRepository } from 'src/persistence/repository/core/user.repository';
+import { UserRepository } from '../../../persistence/repository/core/user.repository';
 import { CoreDatasourceService } from '../datasource/datasource.service';
-import { User } from 'src/persistence/entities/core/user.entity';
-import { NotImplementedException } from 'src/core/exceptions/NotImplemented.exception';
+import { User } from '../../../persistence/entities/core/user.entity';
+import { CreateUserDTO } from 'src/core/dto/core/user.dto';
 
 export class UserService {
   private readonly _coreDatasourceService: CoreDatasourceService;
@@ -17,7 +17,14 @@ export class UserService {
     this._userRepo = new UserRepository(connection);
   }
 
-  public async create(): Promise<User> {
-    throw new NotImplementedException();
+  public async create(userData: CreateUserDTO): Promise<User> {
+    const userEntityData = new User({
+      firstName: userData.firstName,
+      lastName: userData.lastName,
+      age: userData.age,
+      gender: userData.gender,
+    });
+    const userEntity = await this._userRepo.save(userEntityData);
+    return userEntity;
   }
 }

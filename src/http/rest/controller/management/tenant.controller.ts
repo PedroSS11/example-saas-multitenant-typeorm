@@ -1,8 +1,8 @@
 import { Controller, Get, Post } from '@overnightjs/core';
 import { Request, Response } from 'express';
-import AppLogger from '../../../infra/monitoring/app.logger';
-import { TenantService } from '../../../core/services/management/tenant.service';
-import { RegisterTenantData } from '../types/tenant.types';
+import AppLogger from '../../../../infra/monitoring/app.logger';
+import { TenantService } from '../../../../core/services/management/tenant.service';
+import { RegisterTenantData } from '../../types/tenant.types';
 
 @Controller('api/tenant')
 export class TenantController {
